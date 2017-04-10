@@ -1,50 +1,22 @@
-//nodeMCU v1.0 (black) with Arduino IDE
-//stream temperature data DS18B20 with 1wire on ESP8266 ESP12-E (nodeMCU v1.0)
-//shin-ajaran.blogspot.com
-//nodemcu pinout https://github.com/esp8266/Arduino/issues/584
 #include <ESP8266WiFi.h>
-//#include <OneWire.h>
-//#include <DallasTemperature.h>
-
-//Def
-//#define myPeriodic 15 //in sec | Thingspeak pub is 15sec
-//#define ONE_WIRE_BUS 2  // DS18B20 on arduino pin2 corresponds to D4 on physical board
-//#define mySSR 0  // Solid State Relay on pin 0
-
-//OneWire oneWire(ONE_WIRE_BUS);
-//DallasTemperature DS18B20(&oneWire);
-//float prevTemp = 0;
 const char* server = "api.thingspeak.com";
 String apiKey ="5G3QSIJP3HTCSH25";
 const char* MY_SSID = "Paradise"; 
 const char* MY_PWD = "mukesh9980813506";
 int sent = 0;
-void setup() {
+void setup() 
+{
   Serial.begin(115200);
   connectWifi();
 }
 
 void loop() {
-  //float temp;
-  //char buffer[10];
-  //DS18B20.requestTemperatures(); 
-  //temp = DS18B20.getTempCByIndex(0);
-  //String tempC = dtostrf(temp, 4, 1, buffer);//handled in sendTemp()
-  //Serial.print(String(sent)+" Temperature: ");
-  //Serial.println(temp);
-  
-  //if (temp != prevTemp)
-  //{
-  //sendTeperatureTS(temp);
-  //prevTemp = temp;
-  //}
-  float llat,llong;
-  llat+=2;
-  llong+=2;
-  
-  sendTeperatureTS(llong);
-  //int count = myPeriodic;
-  //while(count--)
+  double llat,llong;
+//Recieve latitude and longitude values through GPS code
+  //sendLocation(llat, llong);
+  sendLocation(13.113982, 77.634618); //Reva University
+  sendLocation(13.124995, 77.620379); //Brindavan College
+  sendLocation(13.122134, 77.610543); //Bagalur Cross
   delay(1000);
 }
 
@@ -62,15 +34,16 @@ void connectWifi()
   Serial.println("");  
 }//end connect
 
-void sendTeperatureTS(float llong)
+void sendLocation(double llat, double llong)
 {  
    WiFiClient client;
-  
    if (client.connect(server, 80)) { // use ip 184.106.153.149 or api.thingspeak.com
    Serial.println("WiFi Client connected ");
    
    String postStr = apiKey;
    postStr += "&field1=";
+   postStr += String(llat);
+   postStr += "&field2=";
    postStr += String(llong);
    postStr += "\r\n\r\n";
    
@@ -89,4 +62,3 @@ void sendTeperatureTS(float llong)
    sent++;
  client.stop();
 }//end send
-
