@@ -45,7 +45,7 @@ void sendLocation(double llat, double llong)
    postStr += String(llat);
    postStr += "&field2=";
    postStr += String(llong);
-   postStr += "\r\n\r\n";
+   //postStr += "\r\n\r\n";
    
    client.print("POST /update HTTP/1.1\n");
    client.print("Host: api.thingspeak.com\n");
