@@ -14,10 +14,18 @@ void loop() {
   double llat,llong;
 //Recieve latitude and longitude values through GPS code
   //sendLocation(llat, llong);
-  sendLocation(13.113982, 77.634618); //Reva University
-  sendLocation(13.124995, 77.620379); //Brindavan College
-  sendLocation(13.122134, 77.610543); //Bagalur Cross
-  delay(1000);
+  sendLocation(30.741778, 76.775041); //1431, Jan Marg
+                                      //23B, Sector 23, Chandigarh, 160023
+                                      //30.741778, 76.775041 (School)
+  delay(5000);
+  sendLocation(26.924087, 75.826743); //39-a, Hawa Mahal Rd
+                                      //J.D.A. Market, Jaipur, Rajasthan 302002
+                                      //26.924087, 75.826743
+  delay(5000);
+  sendLocation(22.554254, 88.335859); //Fort William, India
+                                      //Maidan, Fort William, Hastings, Kolkata, West Bengal 700021
+                                      //22.554254, 88.335859
+  delay(5000);
 }
 
 void connectWifi()
